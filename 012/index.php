@@ -71,10 +71,14 @@ echo str_ireplace(array('a','e','i','o','u',' '), '', "It's a Wonderful Life");
 echo '<br>';
 echo '----------8----------';
 echo '<br>';
-$epizodai = 'Star Wars: Episode '.str_repeat(' ', rand(0,5)). rand(1,9) . ' - A New Hope';
+$epizodai = 'Star Wars: Episode '.str_repeat(' ', rand(0,5)). rand(1,9999) . ' - A New Hope';
 echo $epizodai . '<br>';
 $int = (int) filter_var($epizodai, FILTER_SANITIZE_NUMBER_INT);  
 echo("Serijos numeris yra: $int \n"); 
+echo '<br>';echo '<br>'; 
+/*kitoks budas*/
+preg_match('/\d+/',$epizodai,$skaicius);
+echo $skaicius[0];
 
 echo '<br>';
 echo '----------9----------';
