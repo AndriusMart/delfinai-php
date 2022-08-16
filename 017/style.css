@@ -1,0 +1,21 @@
+body{
+    margin: 0;
+}
+.two-links{
+    background-color: coral;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.two-links a{
+    color: cornflowerblue;
+    text-decoration: none;
+    transition: all 1s;
+    padding: 20px;
+    font-size: 30px;
+
+}
+.two-links a:hover{
+    color: rgb(207, 24, 51);
+
+}
