@@ -1,0 +1,18 @@
+{
+    "name": "37062/024",
+    "description": "Bla bla bla",
+    "autoload": {
+        "psr-4": {
+            "Petro\\": "01/",
+            "Antano\\Belekas\\": "02/",
+            "": "01/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrius Martinkėnas",
+            "email": "andrius.martinkenas321@gmail.com"
+        }
+    ],
+    "require": {}
+}
