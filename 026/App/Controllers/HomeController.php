@@ -9,7 +9,7 @@ class HomeController {
 
     public function home()
     {
-        new Json;
+        Json::connect();
 
         $title = 'H-O-M-E';
         $welcome = 'Hello from fancy zoo!';
