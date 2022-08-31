@@ -12,29 +12,28 @@ App\App::view('top', ['title' => $title]);
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <?php foreach($animals as $animal) : ?>
-                        <li class="list-group-item">
-                            <div class="line">
-                                <div class="line__content">
-                                    <div class="line__content__type">
-                                        <?= $animal['type'] ?>
+                        <?php foreach ($animals as $animal) : ?>
+                            <li class="list-group-item">
+                                <div class="line">
+                                    <div class="line__content">
+                                        <div class="line__content__type">
+                                            <?= $animal['type'] ?>
+                                        </div>
+                                        <div class="line__content__weight">
+                                            <?= $animal['weight'] ?> kg
+                                        </div>
+                                        <?php if ($animal['tail']) : ?>
+                                            <div class="line__content__tail"></div>
+                                        <?php endif ?>
                                     </div>
-                                    <div class="line__content__weight">
-                                        <?= $animal['weight'] ?> kg
+                                    <div class="line__buttons">
+                                        <a href="<?= URL . 'animals/edit/' . $animal['id'] ?>" type="button" class="btn btn-outline-success m-2">Edit</a>
+                                        <form action="<?= URL ?>animals/delete/<?= $animal['id'] ?>" method="post">
+                                            <button type="submit" class="btn btn-outline-danger m-2">Delete</button>
+                                        </form>
                                     </div>
-                                    <?php if ($animal['tail']) : ?>
-                                    <div class="line__content__tail"></div>
-                                    <?php endif ?>
                                 </div>
-                                <div class="line__buttons">
-                                    <a href="<?= URL.'animals/edit/'.$animal['id'] ?>" type="button"
-                                        class="btn btn-outline-success m-2">Edit</a>
-                                    <form action="<?= URL ?>animals/delete/<?= $animal['id'] ?>" method="post">
-                                        <button type="submit" class="btn btn-outline-danger m-2">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
                         <?php endforeach ?>
                     </ul>
                 </div>
