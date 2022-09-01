@@ -10942,3 +10942,37 @@ h1 span, .h1 span {
   justify-content: flex-end;
   align-items: center;
 }
+
+.user-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+.user-nav .name {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.nav {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.msg-bin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  width: 100%;
+}
+.msg-bin .msg {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  min-width: 300px;
+  text-align: center;
+  font-size: 25px;
+}

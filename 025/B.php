@@ -1,10 +1,11 @@
 <?php
 
-trait B {
+trait B
+{
 
-    public function read(){
+    public function read()
+    {
 
         return 'B';
     }
-
 }

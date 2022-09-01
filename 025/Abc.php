@@ -1,6 +1,7 @@
 <?php
 
-class Abc extends C {
+class Abc extends C
+{
 
     use A;
 
