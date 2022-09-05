@@ -1,0 +1,17 @@
+{
+    "name": "37062/bankas",
+    "description": "Bankas",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrius Martinkėnas",
+            "email": "andrius.martinkenas321@gmail.com"
+        }
+    ],
+    "require": {}
+}
