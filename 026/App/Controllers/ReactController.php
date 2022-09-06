@@ -30,4 +30,16 @@ class ReactController
         Json::connect()->delete($id);
         return App::json(['msg' => 'Hello, zoo']);
     }
+    public function update(int $id)
+    {
+
+        $rawData = file_get_contents("php://input");
+        $rawData = json_decode($rawData, 1);
+        Json::connect()->update($id, [
+            'type' => $rawData['type'],
+            'weight' => $rawData['weight'],
+            'tail' => $rawData['tail']
+        ]);
+        return App::json(['msg' => 'Hello, zoo']);
+    }
 }
