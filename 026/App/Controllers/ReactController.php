@@ -28,7 +28,7 @@ class ReactController
     public function delete(int $id)
     {
         Json::connect()->delete($id);
-        return App::json(['msg' => 'Animal dead']);
+        return App::json(['msg' => 'Animal is dead']);
     }
     public function update(int $id)
     {
