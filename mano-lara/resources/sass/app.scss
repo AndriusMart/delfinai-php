@@ -6,3 +6,81 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.posts-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .content{
+        h2{
+            color: crimson;
+            margin: 0px;
+        }
+    }
+    .buttons{
+        display: flex;
+        align-items: center;
+        button,
+        a,
+        form{
+            margin: 5px 10px;
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        button{
+            transform: rotate(0.5deg);
+        }
+    }
+}
+
+textarea.form-control{
+    min-height: 150px;
+}
+.header.back{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.close {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+  
+  .close::before,
+  .close::after {
+      content: '';
+      width: 1px;
+      height: 100%;
+      background: #333;
+      display: block;
+      transform: rotate(45deg) translateX(0px);
+      position: absolute;
+      left: 50%;
+      top: 0;
+  }
+  
+ .close::after {
+      transform: rotate(-45deg) translateX(0px);
+  }

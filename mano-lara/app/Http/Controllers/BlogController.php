@@ -14,7 +14,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $c = collect();
+        $c->add('Z');
+        $c->add('F');
+        $c = $c->sort(fn($x,$y)=> $x <=> $y);
+        $blogs = Blog::all();
+        return view('blog.index', ['blogs' => $blogs, 'c' => $c]);
     }
 
     /**
@@ -34,7 +39,18 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|min:4|max:20',
+            'post' => 'required',
+        ], [
+            'title.min' => 'Per trumpas pavadinimas'
+        ]);
+
+        $blog = new Blog;
+        $blog->title = $request->title;
+        $blog->post = $request->post;
+        $blog->save();
+        return redirect()->route('index')->with('success_msg', 'Sauniai!');
     }
 
     /**
@@ -45,7 +61,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+
+        return view('blog.show', ['blog' => $blog]);
     }
 
     /**
@@ -56,7 +73,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('blog.edit', ['blog' => $blog]);
     }
 
     /**
@@ -67,7 +84,17 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|min:4|max:20',
+            'post' => 'required',
+        ], [
+            'title.min' => 'Per trumpas pavadinimas'
+        ]);
+
+        $blog->title = $request->title;
+        $blog->post = $request->post;
+        $blog->save();
+        return redirect()->route('index');
     }
 
     /**
@@ -78,6 +105,13 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->route('index')->with('success_msg', 'Sekmingai, pasalinai!');
     }
+
+    public function back()
+    {
+        return redirect()->route('index');
+    }
+
 }
