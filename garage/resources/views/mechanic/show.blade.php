@@ -8,14 +8,14 @@
                 <div class="card-header">
                     <div class="header-back">
                         <h2>Mechanic</h2>
-                        <a href="{{route('index')}}" class="close"><span class="sr-only">Close</span></a>
+                        <a href="{{route('m_index')}}" class="close"><span class="sr-only">Close</span></a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="posts-list">
                         <div class="content">
-                            <h5>{{$blog->title}}</h5>
-                            <p>{{$blog->post}}</p>
+                            <h5>{{$mechanic->name}}</h5>
+                            <h5>{{$mechanic->surname}}</h5>
                         </div>
                     </div>
                 </div>
