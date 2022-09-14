@@ -109,9 +109,4 @@ class BlogController extends Controller
         return redirect()->route('index')->with('success_msg', 'Sekmingai, pasalinai!');
     }
 
-    public function back()
-    {
-        return redirect()->route('index');
-    }
-
 }

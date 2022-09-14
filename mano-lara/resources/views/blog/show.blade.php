@@ -8,10 +8,7 @@
                 <div class="card-header">
                     <div class="header-back">
                         <h2>Post</h2>
-                        <form action="{{route('back')}}" method="post">
-                            @csrf
-                            <button type="submit" class="close"><span class="sr-only">Close</span></button>
-                        </form>
+                        <a href="{{route('index')}}" class="close"><span class="sr-only">Close</span></a>
                     </div>
                 </div>
                 <div class="card-body">
