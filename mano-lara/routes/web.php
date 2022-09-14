@@ -44,5 +44,4 @@ Route::prefix('blog')->group(function () {
     Route::delete('/delete/{blog}', [B::class, 'destroy'])->name('delete');
     Route::get('/edit/{blog}', [B::class, 'edit'])->name('edit');
     Route::put('/edit/{blog}', [B::class, 'update'])->name('update');
-    Route::post('/back', [B::class, 'back'])->name('back');
 });
