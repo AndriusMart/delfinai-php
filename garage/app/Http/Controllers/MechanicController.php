@@ -40,7 +40,7 @@ class MechanicController extends Controller
         $mechanic->name = $request->name;
         $mechanic->surname = $request->surname;
         $mechanic->save();
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('success_msg',  'Good job, new mechanic added.');
     }
 
     /**
@@ -77,7 +77,7 @@ class MechanicController extends Controller
         $mechanic->name = $request->name;
         $mechanic->surname = $request->surname;
         $mechanic->save();
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('success_msg',  'Good job, mechanic updated.');
     }
 
     /**
@@ -88,9 +88,11 @@ class MechanicController extends Controller
      */
     public function destroy(Mechanic $mechanic)
     {
-
-        // grysim cia
+        if($mechanic->getTrucks()->count()){
+            return redirect()->back()->with('info_msg',  'Oh no, you can not delete this one.');
+        }
+        
         $mechanic->delete();
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('success_msg',  'Mechanic was deleted.');
     }
 }

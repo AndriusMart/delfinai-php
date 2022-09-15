@@ -84,3 +84,106 @@ textarea.form-control{
  .close::after {
       transform: rotate(-45deg) translateX(0px);
   }
+
+
+  .trucks-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .content{
+        display: flex;
+        h2{
+            display: flex;
+        align-items: center;
+            color: black;
+            margin: 0 5px;
+            font-size: 22px;
+            span {
+                font-size: 12px;
+                color: gray;
+                margin-right: 10px;
+            }
+        }
+        h4{
+            display: flex;
+        align-items: center;
+            color: rgb(170, 42, 42);
+            margin: 0 5px;
+            font-size: 22px;
+            margin: 0 0 0 15px;
+            span {
+                font-size: 12px;
+                color: gray;
+                margin-right: 10px;
+            }
+        }
+        h5{
+            display: flex;
+        align-items: center;
+            color: rgb(239, 6, 6);
+            margin: 0 5px;
+            font-size: 22px;
+            margin: 0 0 0 15px;
+            span {
+                font-size: 12px;
+                color: gray;
+                margin-right: 10px;
+            }
+            a{
+                text-decoration: none;
+                color: rgb(239, 6, 6);
+                &:hover {
+                    color: olivedrab;
+                }
+            }
+        }
+    }
+    .buttons{
+        display: flex;
+        align-items: center;
+        button,
+        a,
+        form{
+            margin: 5px 10px;
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        button{
+            transform: rotate(0.5deg);
+        }
+    }
+}
+
+.mechanic{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    h5{
+        margin: 10px;
+        font-size: 40px;
+        color: crimson;
+    }
+
+}
+
+.truck-show{
+    .line{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        h5{
+            margin: 0 0 0 5px;
+        }
+    }
+    p{
+        font-family: 'Courier New', Courier, monospace;
+        color: gray;
+    }
+}

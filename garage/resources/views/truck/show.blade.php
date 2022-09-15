@@ -7,15 +7,19 @@
             <div class="card">
                 <div class="card-header">
                     <div class="header-back">
-                        <h2>Mechanic</h2>
-                        <a href="{{route('m_index')}}" class="close"><span class="sr-only">Close</span></a>
+                        <h2>Truck</h2>
+                        <a href="{{route('t_index')}}" class="close"><span class="sr-only">Close</span></a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="posts-list">
                         <div class="content">
-                            <h5>{{$mechanic->name}}</h5>
-                            <h5>{{$mechanic->surname}}</h5>
+                            <div class="truck-show">
+                            <div class="line"><small>Plate: </small><h5>{{$truck->plate}}</h5></div>
+                            <div class="line"><small>Maker: </small><h5>{{$truck->maker}}</h5></div>
+                            <div class="line"><small>Mechanic: </small><h5>{{$truck->getMechanic->name}} {{$truck->getMechanic->name}}</h5></div>
+                            <p>{{$truck->mechanic_notices}}</p>
+                        </div>
                         </div>
                     </div>
                 </div>
