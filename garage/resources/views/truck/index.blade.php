@@ -16,7 +16,12 @@
                                 <div class="content">
                                     <h2><span>plate: </span>{{$truck->plate}}</h2>
                                     <h4><span>maker: </span>{{$truck->maker}}</h4>
-                                    <h5><span>mechanic: </span><a href="{{route('m_show', $truck->getMechanic->id)}}">{{$truck->getMechanic->name}} {{$truck->getMechanic->surname}}</>a</h5>
+                                    <h5><span>mechanic: </span><a
+                                            href="{{route('m_show', $truck->getMechanic->id)}}">{{$truck->getMechanic->name}}
+                                            {{$truck->getMechanic->surname}}</>a</h5>
+                                    @if($truck->photo)
+                                    <h5><a class="btn btn-outline-primary "href="{{$truck->photo}}" target="_BLANK">Photo</a></h5>
+                                    @endif
                                 </div>
                                 <div class=" buttons">
                                     <a href="{{route('t_show', $truck)}}" class="btn btn-info">Show</a>
