@@ -17,8 +17,11 @@ class TruckController extends Controller
     public function index()
     {
         $trucks = Truck::all();
+        $mechanics = Mechanic::orderBy('surname', 'asc')->get();
+
         return view('truck.index', [
-            'trucks' => $trucks
+            'trucks' => $trucks,
+            'mechanics' => $mechanics
         ]);
     }
 
@@ -29,7 +32,9 @@ class TruckController extends Controller
      */
     public function create()
     {
-        $mechanics = Mechanic::all();
+        $mechanics = Mechanic::orderBy('name')->orderBy('surname', 'desc')->get();
+        //$mechanics = $mechanics->sortBy('name'); // paciam lara negerai, nebent duombazeje negalima
+
         return view('truck.create', [
             'mechanics' => $mechanics
         ]);
