@@ -14,6 +14,7 @@ class MechanicController extends Controller
      */
     public function index(Request $request)
     {
+        //size per page
         $perPage = match( $request->per_page) {
             'all' => 100000,
             '5' => 5,
@@ -22,7 +23,7 @@ class MechanicController extends Controller
             '50' => 50,
             default => 1000000
         };
-        
+        //order
         $mechanics = match ($request->sort) {
             'name_asc' => Mechanic::orderBy('name', 'asc')->paginate($perPage)->withQueryString(),
             'name_desc' => Mechanic::orderBy('name', 'desc')->paginate($perPage)->withQueryString(),

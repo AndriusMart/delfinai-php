@@ -14,14 +14,38 @@ class TruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $trucks = Truck::all();
+        //search
+        if ($request->mech) {
+            $id = (int) $request->mech;
+            if ($request->s) {
+                $trucks = Truck::where('mechanic_id', $id)->where(function ($query) use ($request) {
+                    $query->where('maker', 'like', '%' . $request->s . '%')
+                        ->orWhere('make_year', 'like', '%' . $request->s . '%')
+                        ->orWhere('plate', 'like', '%' . $request->s . '%');
+                })->paginate(15)->withQueryString();
+            } else {
+                $trucks = Truck::where('mechanic_id', $id)->paginate(15)->withQueryString();
+            }
+        } else {
+            if ($request->s) {
+                $trucks = Truck::where('maker', 'like', '%' . $request->s . '%')
+                    ->orWhere('make_year', 'like', '%' . $request->s . '%')
+                    ->orWhere('plate', 'like', '%' . $request->s . '%')->paginate(15)->withQueryString();
+            } else {
+                $trucks = Truck::paginate(15)->withQueryString();
+            }
+        }
+
+
         $mechanics = Mechanic::orderBy('surname', 'asc')->get();
 
         return view('truck.index', [
             'trucks' => $trucks,
-            'mechanics' => $mechanics
+            'mechanics' => $mechanics,
+            'mech' => $id ?? 0,
+            's' => $request->s ?? ''
         ]);
     }
 
@@ -56,8 +80,8 @@ class TruckController extends Controller
             $ext = $photo->getClientOriginalExtension();
             $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name . '-' . rand(100000, 999999) . '.' . $ext;
-            $Image = Image::make($photo)->pixelate(12);
-            $Image->save(public_path() . '/trucks/' . $file);
+            $Image = Image::make($photo)->pixelate(12); //
+            $Image->save(public_path() . '/trucks/' . $file); //
             // $photo->move(public_path().'/trucks', $file);
             $truck->photo = asset('/trucks') . '/' . $file;
         }
@@ -113,14 +137,14 @@ class TruckController extends Controller
         $truck->mechanic_notices = $request->mechanic_notices;
         $truck->mechanic_id = $request->mechanic_id;
 
-    
-        if($request->delete_photo){
-            unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
+
+        if ($request->delete_photo) {
+            unlink(public_path() . '/trucks/' . pathinfo($truck->photo, PATHINFO_FILENAME) . '.' . pathinfo($truck->photo, PATHINFO_EXTENSION));
             $truck->photo = null;
         }
         if ($request->file('photo')) {
-            if($truck->photo){
-                unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
+            if ($truck->photo) {
+                unlink(public_path() . '/trucks/' . pathinfo($truck->photo, PATHINFO_FILENAME) . '.' . pathinfo($truck->photo, PATHINFO_EXTENSION));
             }
             $photo = $request->file('photo');
             $ext = $photo->getClientOriginalExtension();
@@ -145,8 +169,8 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck)
     {
-        if($truck->photo){
-            unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
+        if ($truck->photo) {
+            unlink(public_path() . '/trucks/' . pathinfo($truck->photo, PATHINFO_FILENAME) . '.' . pathinfo($truck->photo, PATHINFO_EXTENSION));
         }
 
         $truck->delete();
