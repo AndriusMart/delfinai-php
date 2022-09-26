@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
 
-                    <select data-create name="mechanic_id" class="form-select mt-3">
+                    <select data-create name="mechanic_id" class="form-select mb-3">
                         <option value="0">Choose mechanic</option>
                         @foreach($mechanics as $mechanic)
                         <option value="{{$mechanic->id}}">{{$mechanic->name}} {{$mechanic->surname}}</option>
@@ -23,16 +23,16 @@
                     <span class="input-group-text">Notes</span>
                     <textarea data-create class="form-control" name="notes"></textarea>
                 </div>
-                <select data-create name="status" class="form-select mt-3">
-                    <option value="1">Created</option>
-                    <option value="2">In progres</option>
-                    <option value="3">Done</option>
+                <select data-create name="status" class="form-select mb-3 mt-3">
+                    @foreach($status as $key => $value)
+                    <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
                 </select>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Price</span>
                     <input data-create type="text" name="price" class="form-control">
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group ">
                     <span class="input-group-text">Discount</span>
                     <input data-create type="text" name="discount" class="form-control">
                 </div>

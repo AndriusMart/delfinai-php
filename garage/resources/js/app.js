@@ -1,5 +1,6 @@
 import "./bootstrap";
 import axios from "axios";
+import { Modal } from 'bootstrap';
 
 const mainContent = document.querySelector(".--content");
 if (mainContent) {
@@ -31,25 +32,58 @@ if (breakdown) {
         breakdown.querySelectorAll("[data-create]").forEach((i) => {
             data[i.getAttribute("name")] = i.value;
         });
-        axios.post(breakdownUrl + '/create', data)
-        .then(res =>{
-            console.log(res.data);
-            getList();
-        })
-        .catch(error => {
-            console.log('Viskas Blogai');
-        })
+        axios
+            .post(breakdownUrl + "/create", data)
+            .then((res) => {
+                console.log(res.data);
+                getList();
+            })
+            .catch((error) => {
+                console.log("Viskas Blogai");
+            });
     });
-    window.addEventListener('load', () =>{
+    window.addEventListener("load", () => {
         getList();
-    })
+    });
 }
 
 const getList = () => {
     const breakdownsList = document.querySelector("#breakdowns-list");
-    axios
-    .get(breakdownUrl + "/list/")
-    .then((res) => {
+    axios.get(breakdownUrl + "/list/").then((res) => {
         breakdownsList.innerHTML = res.data.html;
+        deleteEvent();
+        modalEvent();
     });
+};
+
+const deleteEvent = () => {
+    document.querySelectorAll('.delete--button')
+        .forEach(b => {
+            b.addEventListener('click', () => {
+                axios.delete(breakdownUrl + '/' + b.dataset.id)
+                .then(res => {
+                    if(res.data.refresh == 'list'){
+                        getList();
+                    }
+                })
+            });
+        });
+}
+
+const modalEvent = () => {
+    const modal = document.querySelector('#edit-modal');
+    const fadeModal = new Modal(modal);
+    document.querySelectorAll('.edit--button')
+    .forEach(b => {
+        b.addEventListener('click', () => {
+            axios.get(breakdownUrl + '/modal/' + b.dataset.id)
+            .then(res => {
+                modal.querySelector('.modal-dialog').innerHTML = res.data.html;
+                fadeModal.show();
+            })
+            
+        })
+    })
+   
+
 }
