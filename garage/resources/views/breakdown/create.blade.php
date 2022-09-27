@@ -2,11 +2,11 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header"> 
                     <h2>Register new breakdown</h2>
                 </div>
                 <div class="card-body">
-
+                    
                     <select data-create name="mechanic_id" class="form-select mb-3">
                         <option value="0">Choose mechanic</option>
                         @foreach($mechanics as $mechanic)

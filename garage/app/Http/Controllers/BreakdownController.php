@@ -20,7 +20,7 @@ class BreakdownController extends Controller
     {
         $mechanics = Mechanic::orderBy('name')->get();
         return view('breakdown.index', [
-            'mechanics' => $mechanics,
+            'mechanics' => $mechanics, 
             'status' => Breakdown::STATUS
         ]);
     }

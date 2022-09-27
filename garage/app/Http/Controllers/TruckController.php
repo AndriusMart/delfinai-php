@@ -110,6 +110,7 @@ class TruckController extends Controller
     public function show(Truck $truck)
     {
         return view('truck.show', ['truck' => $truck]);
+        return view('truck.show', compact('truck', ));
     }
 
     /**
