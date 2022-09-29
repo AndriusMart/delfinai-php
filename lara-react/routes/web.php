@@ -29,7 +29,16 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::get('/red-square', [S::class, 'redSquare']);
+Route::post('/add-square', [S::class, 'addSquare']);
+Route::get('/get-squares', [S::class, 'getSquares']);
+Route::delete('/reset-squares', [S::class, 'resetSquares']);
+
+
+
+
 Route::get('/red-square-blade', [S::class, 'redSquareBlade']);
 
 
