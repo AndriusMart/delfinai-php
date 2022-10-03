@@ -14,20 +14,25 @@
                                             <div class="category">
                                                 <h5>{{$category->title}}</h5>
                                             </div>
-                                            {{-- <ul class="list-group">
-                                                @forelse($category->getTrucks as $truck)
+                                            <ul class="list-group">
+                                                @forelse($category->movies as $movie)
                                                 <li class="list-group-item">
-                                                    <div class="trucks-list">
+                                                    <div class="movies-list">
                                                         <div class="content">
-                                                            <h2><span>plate: </span>{{$truck->plate}}</h2>
-                                                            <h4><span>maker: </span>{{$truck->maker}}</h4>
+                                                            <h2><span>title: </span>{{$movie->title}}</h2>
+                                                            <h4><span>price: </span>{{$movie->price}}</h4>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 @empty
                                                 <li class="list-group-item">No trucks found</li>
                                                 @endforelse
-                                            </ul> --}}
+                                            </ul>
+                                            <form action="{{route('c_delete_movies', $category)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
