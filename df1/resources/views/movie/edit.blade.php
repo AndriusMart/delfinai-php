@@ -6,44 +6,38 @@
         <div class="col-5">
             <div class="card">
                 <div class="card-header">
-                    <h2>Update Movie</h2>
+                    <h2>New Movie</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{route('m_update', $movie)}}" method="post" enctype="multipart/form-data">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Title</span>
-                            <input type="text" name="title" class="form-control"
-                                value="{{old('title', $movie->title)}}">
+                            <input type="text" name="title" class="form-control" value="{{old('title', $movie->title)}}">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Price</span>
-                            <input type="text" name="price" class="form-control"
-                                value="{{old('price' , $movie->price)}}">
+                            <input type="text" name="price" class="form-control" value="{{old('price', $movie->price)}}">
                         </div>
-                        {{-- @if($movie->photo)
-                        <div class="img-small">
-                            <img src="{{$movie->photo}}" alt="Movie photo">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="del-photo" name="delete_photo">
-                                <label class="form-check-label" for="del-photo">
-                                  Delete photo
-                                </label>
-                              </div>
-                        </div>
-                        @else
-                        <h5 class="input-group mt-3">no photo</h5>
-                        @endif
                         <div class="input-group mt-3">
-                            <span class="input-group-text">Movie photo</span>
-                            <input type="file" name="photo" class="form-control">
-                        </div> --}}
+                            <span class="input-group-text">Photo</span>
+                            <input type="file" name="photo[]" multiple class="form-control">
+                        </div>
+                        <div class="img-small-ch mt-3">
+                            @forelse($movie->getPhotos as $photo)
+                            <div class="img">
+                                <label for="{{$photo->id}}-del-photo">X</label>
+                                <input type="checkbox" value="{{$photo->id}}" id="{{$photo->id}}-del-photo" name="delete_photo[]">
+                                <img src="{{$photo->url}}">
+                            </div>
+                            @empty
+                            <h2>No photos yet.</h2>
+                            @endforelse
+                        </div>
+
                         <select name="category_id" class="form-select mt-3">
                             <option value="0">Choose category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->id}}" @if($category->id == old('category_id', $movie->category_id))
-                                selected
-                                @endif
-                                >{{$category->title}}</option>
+                            <option value="{{$category->id}}" @if($category->id == old('category_id', $movie->category_id)) selected @endif>{{$category->title}}</option>
                             @endforeach
                         </select>
                         @csrf

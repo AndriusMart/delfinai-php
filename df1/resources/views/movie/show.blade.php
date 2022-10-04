@@ -24,11 +24,20 @@
                                 <div class="line"><small>category: </small>
                                     <h5>{{$movie->getCategory->title}}</h5>
                                 </div>
-                                @if($movie->photo)
-                                <div class="img">
-                                    <img src="{{$movie->photo}}" alt="Movie photo">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        @forelse($movie->getPhotos as $photo)
+
+                                        <div class="img swiper-slide">
+                                            <img src="{{$photo->url}}" alt="Movie photo">
+                                        </div>
+                                        @empty
+                                        <h3>No Photos</h3>
+                                        @endforelse
+                                    </div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
                                 </div>
-                                @endif
                             </div>
                         </div>
                     </div>
