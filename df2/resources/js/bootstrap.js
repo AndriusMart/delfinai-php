@@ -17,8 +17,6 @@ import axios from 'axios';
   import 'swiper/css/pagination';
 
   const swiper = new Swiper('.swiper', {
-    // Optional parameters
-    direction: 'vertical',
     loop: true,
     // Navigation arrows
     navigation: {

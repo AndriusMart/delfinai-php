@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Movie extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'price', 'category_id'];
+    protected $fillable = ['title', 'price'];
 
 
     const SORT_SELECT = [
@@ -20,9 +20,10 @@ class Movie extends Model
         ['price_asc', 'Price 1-9'],
         ['price_desc', 'Price 9-1'],
     ];
-    public function getCategory()
+
+    public function getComments()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->hasMany(Comment::class, 'movie_id', 'id');
     }
 
     public function getPhotos()

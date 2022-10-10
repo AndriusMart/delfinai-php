@@ -21,14 +21,20 @@
                                 <div class="line"><small>Price: </small>
                                     <h5>{{$movie->price}}</h5>
                                 </div>
-                                <div class="line"><small>category: </small>
-                                    <h5>{{$movie->getCategory->title}}</h5>
-                                </div>
-                                <div class="swiper">
-                                    <div class="swiper-wrapper">
+                                <ul class="list-group">Comments:
+                                    @forelse($movie->getComments as $comment)
+                                    <li class="list-group-item">
+                                        <div>{{$comment->post}}</div>
+                                    </li>
+                                    @empty
+                                    <li class="list-group-item">No comments found</li>
+                                    @endforelse
+                                </ul>
+                                <div class="swiper ">
+                                    <div class="swiper-wrapper ">
                                         @forelse($movie->getPhotos as $photo)
 
-                                        <div class="img swiper-slide">
+                                        <div class="img swiper-slide ">
                                             <img src="{{$photo->url}}" alt="Movie photo">
                                         </div>
                                         @empty

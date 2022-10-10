@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Image;
 
@@ -17,7 +16,7 @@ class MovieController extends Controller
     public function index()
     {
         return view('movie.index', [
-            'movies' => Movie::orderBy('updated_at', 'desc')->get(),
+            'movies' => Movie::orderBy('updated_at', 'desc')->paginate(5),
         ]);
     }
 
@@ -29,7 +28,6 @@ class MovieController extends Controller
     public function create()
     {
         return view('movie.create', [
-            'categories' => Category::orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
@@ -44,7 +42,6 @@ class MovieController extends Controller
         Movie::create([
             'title' => $request->title,
             'price' => $request->price,
-            'category_id' => $request->category_id,
         ])->addImages($request->file('photo'));
 
         return redirect()->route('m_index');
@@ -78,7 +75,6 @@ class MovieController extends Controller
             'movie.edit',
             [
                 'movie' => $movie,
-                'categories' => Category::orderBy('updated_at', 'desc')->get(),
             ]
         );
     }
@@ -99,7 +95,6 @@ class MovieController extends Controller
         $movie->update([
             'title' => $request->title,
             'price' => $request->price,
-            'category_id' => $request->category_id,
         ]);
         $movie->removeImages($request->delete_photo)->addImages($request->file('photo'));
 
