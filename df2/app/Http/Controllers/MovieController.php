@@ -27,8 +27,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movie.create', [
-        ]);
+        return view('movie.create', []);
     }
 
     /**
@@ -39,12 +38,30 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'title' => 'required|min:3',
+                'price' => 'required|numeric',
+                'photo.*' => 'sometimes|required|mimes:jpg|max:5000',
+            ],
+            //vertimas i lietuviu (no needed tbh)
+            [
+                'title.required' => 'Nera pavadinimo',
+                'title.min' => 'Pavadinimas turi buti ilgesnis nei 3 raides',
+                'price.required' => 'Nera kainos',
+                'price.numeric' => 'kaina turi buti skaiciai',
+                'photo.required' => 'Nera nuotraukos',
+            ],
+        );
+
+
         Movie::create([
             'title' => $request->title,
             'price' => $request->price,
         ])->addImages($request->file('photo'));
 
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok','New movie created');
     }
 
     /**
@@ -88,7 +105,13 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-
+        $request->validate(
+            [
+                'title' => 'required|min:3',
+                'price' => 'required|numeric',
+                'photo.*' => 'sometimes|required|mimes:jpg|max:5000',
+            ]
+        );
 
 
 
@@ -97,10 +120,10 @@ class MovieController extends Controller
             'price' => $request->price,
         ]);
         $movie->removeImages($request->delete_photo)->addImages($request->file('photo'));
+        $title = $movie->title;
 
 
-
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok',$title.' updated');
     }
 
     /**
@@ -112,12 +135,13 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
 
-        if($movie->getPhotos()->count()){
+        if ($movie->getPhotos()->count()) {
             $delIds = $movie->getPhotos()->pluck('id')->all();
             $movie->removeImages($delIds);
         }
 
+        $title = $movie->title;
         $movie->delete();
-        return redirect()->route('m_index');
+        return redirect()->route('m_index')->with('ok',$title.' deleted');
     }
 }
