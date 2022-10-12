@@ -17,9 +17,17 @@
                                     <h2><span>Title: </span>{{$movie->title}}</h2>
                                     <h4><span>Price: </span>{{$movie->price}}</h4>
                                     <h4><span>Comments: </span>[{{$movie->getComments()->count()}}]</h4>
-
                                     @if($movie->getPhotos()->count())
-                                    <h5><a href="{{$movie->lastImageUrl()}}" target="_BLANK">Photos: [{{$movie->getPhotos()->count()}}]</a> </h5>
+                                    <h5><a href="{{$movie->lastImageUrl()}}" target="_BLANK">Photos:
+                                            [{{$movie->getPhotos()->count()}}]</a> </h5>
+                                    @endif
+                                    @if($movie->getTags()->count())
+                                    <div class="all-tags">
+                                        @foreach($movie->getTags as $tag)
+                                        <a href="{{route('t_show', $tag)}}">#<span>{{$tag->title}}</span></a>
+                                            
+                                        @endforeach
+                                    </div>
                                     @endif
                                 </div>
                                 <div class="buttons">

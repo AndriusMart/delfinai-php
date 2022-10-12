@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Image;
 
@@ -27,7 +28,9 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movie.create', []);
+        return view('movie.create', [
+            'tags' => Tag::orderBy('title')->get(),
+        ]);
     }
 
     /**
@@ -59,9 +62,9 @@ class MovieController extends Controller
         Movie::create([
             'title' => $request->title,
             'price' => $request->price,
-        ])->addImages($request->file('photo'));
+        ])->addImages($request->file('photo'))->addTags($request->tag);
 
-        return redirect()->route('m_index')->with('ok','New movie created');
+        return redirect()->route('m_index')->with('ok', 'New movie created');
     }
 
     /**
@@ -92,6 +95,8 @@ class MovieController extends Controller
             'movie.edit',
             [
                 'movie' => $movie,
+                'tags' => Tag::orderBy('title')->get(),
+                'checkedTags' => $movie->getPivot->pluck('tag_id')->all(),
             ]
         );
     }
@@ -123,7 +128,7 @@ class MovieController extends Controller
         $title = $movie->title;
 
 
-        return redirect()->route('m_index')->with('ok',$title.' updated');
+        return redirect()->route('m_index')->with('ok', $title . ' updated');
     }
 
     /**
@@ -142,6 +147,6 @@ class MovieController extends Controller
 
         $title = $movie->title;
         $movie->delete();
-        return redirect()->route('m_index')->with('ok',$title.' deleted');
+        return redirect()->route('m_index')->with('ok', $title . ' deleted');
     }
 }
